@@ -36,8 +36,10 @@ namespace FarmAutomatorServer
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                 options.UseSqlServer(
+                     Configuration.GetConnectionString("DefaultConnection")));
+            //options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
