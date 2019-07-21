@@ -5,6 +5,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
+using System.Net.Http;
+using Microsoft.Owin.Security;
 
 namespace FarmAutomatorServer.Controllers
 {
@@ -37,8 +39,11 @@ namespace FarmAutomatorServer.Controllers
             var context = Request.GetOwinContext();
             var authManager = context.Authentication;
 
-            authManager.SignIn(new AuthenticationProperties
-            { IsPersistent = loginModel.RememberMe }, identity);
+            authManager.SignIn(
+                new AuthenticationProperties { IsPersistent = false }, //remember me
+                identity);
+
+            return Json(user);
         }
     }
 }
