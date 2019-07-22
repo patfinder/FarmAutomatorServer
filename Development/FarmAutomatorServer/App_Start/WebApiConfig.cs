@@ -10,7 +10,8 @@ namespace FarmAutomatorServer
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
+            // See http://github.com/mccalltd/AttributeRouting/wiki for more options.
+            // To debug routes locally using the built in ASP.NET development server, go to /routes.axd
 
             // Web API routes
             config.MapHttpAttributeRoutes();
