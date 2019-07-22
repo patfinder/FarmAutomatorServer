@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApi", "TestApi\TestApi.csproj", "{455EA0DB-1F52-4953-A55D-242F62E5D602}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarmAutomatorServer", "FarmAutomatorServer\FarmAutomatorServer.csproj", "{59FC6A76-979F-47B0-9997-7670C08652EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{455EA0DB-1F52-4953-A55D-242F62E5D602}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{455EA0DB-1F52-4953-A55D-242F62E5D602}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{455EA0DB-1F52-4953-A55D-242F62E5D602}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{455EA0DB-1F52-4953-A55D-242F62E5D602}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59FC6A76-979F-47B0-9997-7670C08652EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59FC6A76-979F-47B0-9997-7670C08652EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59FC6A76-979F-47B0-9997-7670C08652EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59FC6A76-979F-47B0-9997-7670C08652EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D3C1D7C2-F3BF-4DC3-83EB-130BFCCC6EDE}
+	EndGlobalSection
+EndGlobal
