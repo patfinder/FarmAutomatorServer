@@ -1,0 +1,15 @@
+<configSections>
+    <section name="oracle.manageddataaccess.client" type="OracleInternal.Common.ODPMSectionHandler, Oracle.ManagedDataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342" />
+  </configSections>
+
+  <oracle.manageddataaccess.client>
+    <version number="*">
+      <dataSources>
+        <dataSource alias="pdborcl" descriptor="(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME = pdborcl)))"/>
+      </dataSources>
+      <settings>
+        <!--	<setting name="TNS_ADMIN" value="C:\Users\Oracle\Desktop\"/>  -->
+      </settings>
+    </version>
+  </oracle.manageddataaccess.client>  
+  
