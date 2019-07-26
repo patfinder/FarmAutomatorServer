@@ -50,15 +50,19 @@ namespace FarmAutomatorServer.Controllers
                 IsPersistent = false, // input.RememberMe
             }, identity);
 
-            return Json(new { UserName = "User1", Role = "Manager" });
+            return Json(new { ResultCode = 0, UserName = "User1", Role = "Manager" });
         }
 
-        public ActionResult Test1()
+        [System.Web.Http.HttpGet]
+        [AllowAnonymous]
+        public string Test1()
         {
-            return Json(new { Name = 1, Age = 100 });
+            //return Json(new { Name = 1, Age = 100 });
+            return "Ok";
         }
 
         //[Route("Auth/Test2")]
+        [System.Web.Http.HttpGet]
         [AllowAnonymous]
         public ActionResult Test2()
         {
