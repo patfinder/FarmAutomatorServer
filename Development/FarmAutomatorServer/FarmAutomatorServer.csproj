@@ -170,6 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AttributeRouting.cs" />
+    <Compile Include="Constants\System.cs" />
     <Compile Include="Controllers\ActionController.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\AuthController.cs" />

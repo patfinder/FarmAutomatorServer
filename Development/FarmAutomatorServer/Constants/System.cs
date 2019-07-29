@@ -4,13 +4,10 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 
-namespace FarmAutomatorServer.Utils
+namespace FarmAutomatorServer.Constants
 {
-    public  class DbUtils
+    public static class SystemConstants
     {
-        public static string ConnectionString
-        {
-            get => ConfigurationManager.ConnectionStrings["OracleDb"].ConnectionString;
-        }
+        public static string AuthenticationCookie => "auth-cookie";
     }
 }

@@ -16,6 +16,7 @@ using AttributeRouting.Web.Mvc;
 //using AttributeRouting.Web.Mvc;
 using Dapper;
 using FarmAutomatorServer.Utils;
+using FarmAutomatorServer.Constants;
 
 namespace FarmAutomatorServer.Controllers
 {
@@ -55,7 +56,7 @@ namespace FarmAutomatorServer.Controllers
                 );
 
                 // Cattle cases
-                var user = conn.Query<CattleModel>(command).SingleOrDefault();
+                var user = conn.Query<UserModel>(command).SingleOrDefault();
 
                 if (user == null)
                 {
@@ -65,27 +66,16 @@ namespace FarmAutomatorServer.Controllers
                 var identity = new ClaimsIdentity(new[]{
                     new Claim(ClaimTypes.Name, user.Name),
                     new Claim(ClaimTypes.NameIdentifier, user.Id),
-                    new Claim(ClaimTypes.Role, "role"),
-                }, "auth-cookie");
+                    new Claim(ClaimTypes.Role, user.Role.ToString()),
+                }, SystemConstants.AuthenticationCookie);
 
                 Authentication.SignIn(new AuthenticationProperties
                 {
                     IsPersistent = false, // input.RememberMe
                 }, identity);
 
-                return Json(new
-                {
-                    LastUpdate = DateTime.Now,
-                    Cattles = users,
-                    Tasks = tasks,
-                    Feeds = feeds,
-                });
+                return Json(new { ResultCode = 0, UserName = "User1", Role = "User" });
             }
-
-
-
-            //return Json(new { ResultCode = 0, UserName = "User1", Role = "Manager" }, "application/json");
-            return Json(new { ResultCode = 0, UserName = "User1", Role = "User" });
         }
 
         [System.Web.Http.HttpGet]
