@@ -176,6 +176,7 @@
     <Compile Include="Models\ActionDetailModel.cs" />
     <Compile Include="Models\ActionUploadModel.cs" />
     <Compile Include="Models\ActionModel.cs" />
+    <Compile Include="Models\ApiResult.cs" />
     <Compile Include="Models\FeedModel.cs" />
     <Compile Include="Models\TaskModel.cs" />
     <Compile Include="Models\CattleModel.cs" />

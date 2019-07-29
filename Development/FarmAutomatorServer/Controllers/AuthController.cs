@@ -15,6 +15,7 @@ using Oracle.ManagedDataAccess.Client;
 using AttributeRouting.Web.Mvc;
 //using AttributeRouting.Web.Mvc;
 using Dapper;
+using FarmAutomatorServer.Utils;
 
 namespace FarmAutomatorServer.Controllers
 {
@@ -38,17 +39,50 @@ namespace FarmAutomatorServer.Controllers
         [AllowAnonymous]
         public ActionResult Login(LoginModel model)
         {
-            var identity = new ClaimsIdentity(new[]
+            using (var conn = new OracleConnection(DbUtils.ConnectionString))
             {
-                new Claim(ClaimTypes.Name, "sale_ename"),
-                new Claim(ClaimTypes.NameIdentifier, "sale_no"),
-                new Claim(ClaimTypes.Role, "role"),
-            }, "auth-cookie");
+                conn.Open();
 
-            Authentication.SignIn(new AuthenticationProperties
-            {
-                IsPersistent = false, // input.RememberMe
-            }, identity);
+                var params_ = new
+                {
+                    userName = model.Email,
+                    Password = model.Password,
+                };
+
+                CommandDefinition command = new CommandDefinition(
+                    "SELECT * FROM User WHERE userName = @userName AND password = @password",
+                    params_
+                );
+
+                // Cattle cases
+                var user = conn.Query<CattleModel>(command).SingleOrDefault();
+
+                if (user == null)
+                {
+                    return new HttpNotFoundResult("Invalida name or password");
+                }
+
+                var identity = new ClaimsIdentity(new[]{
+                    new Claim(ClaimTypes.Name, user.Name),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id),
+                    new Claim(ClaimTypes.Role, "role"),
+                }, "auth-cookie");
+
+                Authentication.SignIn(new AuthenticationProperties
+                {
+                    IsPersistent = false, // input.RememberMe
+                }, identity);
+
+                return Json(new
+                {
+                    LastUpdate = DateTime.Now,
+                    Cattles = users,
+                    Tasks = tasks,
+                    Feeds = feeds,
+                });
+            }
+
+
 
             //return Json(new { ResultCode = 0, UserName = "User1", Role = "Manager" }, "application/json");
             return Json(new { ResultCode = 0, UserName = "User1", Role = "User" });

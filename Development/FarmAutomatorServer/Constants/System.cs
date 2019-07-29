@@ -6,7 +6,7 @@ using System.Web;
 
 namespace FarmAutomatorServer.Utils
 {
-    public static class DbUtils
+    public  class DbUtils
     {
         public static string ConnectionString
         {

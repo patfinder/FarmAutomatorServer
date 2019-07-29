@@ -12,5 +12,13 @@ namespace FarmAutomatorServer.Models
         public string Id { get; set; }
 
         public string Name { get; set; }
+
+        public Role Role { get; set; }
+    }
+
+    public enum Role
+    {
+        Unknown,
+        Worker,
     }
 }
