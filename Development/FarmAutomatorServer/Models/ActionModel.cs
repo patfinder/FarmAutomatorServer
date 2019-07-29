@@ -18,7 +18,8 @@ namespace FarmAutomatorServer.Models
         public DateTime ActionTime { get; set; }
 
         /// <summary>
-        /// This field is common between ActionDetail
+        /// Quanity value is common between ActionDetails.
+        /// Store the value here only for copying to ActionDetails
         /// </summary>
         public double Quanity { get; set; }
     }
