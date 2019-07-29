@@ -40,10 +40,10 @@ namespace FarmAutomatorServer.Controllers
         {
             var identity = new ClaimsIdentity(new[]
             {
-                    new Claim(ClaimTypes.Name, "sale_ename"),
-                    new Claim(ClaimTypes.NameIdentifier, "sale_no"),
-                    new Claim(ClaimTypes.Role, "role"),
-                }, "auth-cookie");
+                new Claim(ClaimTypes.Name, "sale_ename"),
+                new Claim(ClaimTypes.NameIdentifier, "sale_no"),
+                new Claim(ClaimTypes.Role, "role"),
+            }, "auth-cookie");
 
             Authentication.SignIn(new AuthenticationProperties
             {

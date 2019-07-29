@@ -3,12 +3,12 @@
 
 namespace FarmAutomatorServer.Models
 {
-    public class TaskDetailModel
+    public class TaskModel
     {
         public string Id { get; set; }
 
-        public string TaskId { get; set; }
-
         public string Name { get; set; }
+
+        public string CattleId { get; set; }
     }
 }

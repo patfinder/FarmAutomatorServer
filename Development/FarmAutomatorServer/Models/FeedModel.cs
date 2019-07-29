@@ -3,9 +3,14 @@
 
 namespace FarmAutomatorServer.Models
 {
-    public class UserModel
+    /// <summary>
+    /// "Tiem Thuoc", "Cho An".
+    /// </summary>
+    public class FeedModel
     {
         public string Id { get; set; }
+
+        public string TaskId { get; set; }
 
         public string Name { get; set; }
     }

@@ -174,8 +174,9 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Models\ActionDetailModel.cs" />
     <Compile Include="Models\ActionModel.cs" />
-    <Compile Include="Models\TaskDetailModel.cs" />
+    <Compile Include="Models\FeedModel.cs" />
     <Compile Include="Models\TaskModel.cs" />
+    <Compile Include="Models\CattleModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="README.md" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
