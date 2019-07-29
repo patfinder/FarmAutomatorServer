@@ -4,10 +4,10 @@
 namespace FarmAutomatorServer.Models
 {
     /// <summary>
-    /// Task table. Store info like: "Tiem Thuoc", "Cho An".
+    /// Task table. Store top level info: Loại heo
     /// Store stask definition. Not real task taken by workers.
     /// </summary>
-    public class TaskModel
+    public class CattleModel
     {
         public string Id { get; set; }
 
