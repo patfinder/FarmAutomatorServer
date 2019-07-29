@@ -15,18 +15,40 @@ using Oracle.ManagedDataAccess.Client;
 using AttributeRouting.Web.Mvc;
 //using AttributeRouting.Web.Mvc;
 using Dapper;
+using System.Configuration;
+using FarmAutomatorServer.Utils;
 
 namespace FarmAutomatorServer.Controllers
 {
     [System.Web.Http.Authorize]
-    public class ReportController : Controller
+    public class DataController : Controller
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(AuthController));
 
-        public string Get()
+        public ActionResult ActionData(DateTime lastUpdate = default(DateTime))
         {
-            //return Json(new { Name = 1, Age = 100 });
-            return "Ok";
+            // TODO: Check update
+            //if not update
+            //return HttpStatusCodeResult();
+
+            // Connect to Oracle
+            using (var conn = new OracleConnection(DbUtils.ConnectionString))
+            {
+                conn.Open();
+
+                // Cattle cases
+                var cattles = conn.Query<CattleModel>("SELECT * FROM Task").ToList();
+                var tasks = conn.Query<TaskModel>("SELECT * FROM Task").ToList();
+                var feeds = conn.Query<FeedModel>("SELECT * FROM Task").ToList();
+
+                return Json(new
+                {
+                    LastUpdate = DateTime.Now,
+                    Cattles = cattles,
+                    Tasks = tasks,
+                    Feeds = feeds,
+                });
+            }
         }
     }
 }

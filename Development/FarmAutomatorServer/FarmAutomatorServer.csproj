@@ -170,9 +170,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AttributeRouting.cs" />
-    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\ActionController.cs" />
+    <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Models\ActionDetailModel.cs" />
+    <Compile Include="Models\ActionUploadModel.cs" />
     <Compile Include="Models\ActionModel.cs" />
     <Compile Include="Models\FeedModel.cs" />
     <Compile Include="Models\TaskModel.cs" />
@@ -184,6 +186,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Utils\DbUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
@@ -196,7 +199,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entity\" />
+    <Folder Include="DbAccess\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

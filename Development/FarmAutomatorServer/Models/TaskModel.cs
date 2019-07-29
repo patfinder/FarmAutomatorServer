@@ -3,6 +3,9 @@
 
 namespace FarmAutomatorServer.Models
 {
+    /// <summary>
+    /// Lưu loại công việc: Cho ăn/Uống thuốc
+    /// </summary>
     public class TaskModel
     {
         public string Id { get; set; }

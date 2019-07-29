@@ -12,15 +12,13 @@ namespace FarmAutomatorServer.Models
 
         public string ActionId { get; set; }
 
-        public string QrCode { get; set; }
+        /// <summary>
+        /// Case Id. Mã chuồng, lấy từ QR code.
+        /// </summary>
+        public string CaseId { get; set; }
 
         public double Quanity { get; set; }
 
-        public string Picture1 { get; set; }
-
-        public string Picture2 { get; set; }
-
-        public string Picture3 { get; set; }
-
+        public string[] PictureIds { get; set; }
     }
 }
