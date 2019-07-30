@@ -25,16 +25,15 @@ namespace FarmAutomatorServer
 
             Log.Info("Startup.Configuration called.");
 
-            var config = new HttpConfiguration();
-
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = "auth-cookie", // DefaultAuthenticationTypes.ApplicationCookie
-                // LoginPath = new PathString("/Home/Login")
+                LoginPath = new PathString("/auth/login"),
                 ExpireTimeSpan = new TimeSpan(0, 0, 15, 0), // 0, 0, AppSettings.AuthenticationTokenMinutes, 0
                 SlidingExpiration = true
             });
 
+            var config = new HttpConfiguration();
             //WebApiConfig.Register(config);
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);
@@ -45,7 +44,7 @@ namespace FarmAutomatorServer
 
             AreaRegistration.RegisterAllAreas();
             //GlobalConfiguration.Configure(WebApiConfig.Register);
-            //FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             //BundleConfig.RegisterBundles(BundleTable.Bundles);
         }

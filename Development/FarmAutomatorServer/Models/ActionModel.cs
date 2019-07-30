@@ -13,7 +13,7 @@ namespace FarmAutomatorServer.Models
 
         public string TaskDetailId { get; set; }
 
-        public string WorkerId { get; set; }
+        public string UserId { get; set; }
 
         public DateTime ActionTime { get; set; }
 

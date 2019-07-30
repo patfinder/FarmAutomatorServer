@@ -164,16 +164,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AttributeRouting.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="Constants\System.cs" />
     <Compile Include="Controllers\ActionController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\JsonDotNetResult.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Models\ActionDetailModel.cs" />
     <Compile Include="Models\ActionUploadModel.cs" />
     <Compile Include="Models\ActionModel.cs" />
@@ -221,7 +228,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>28205</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44352/</IISUrl>
+          <IISUrl>https://localhost:44353/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

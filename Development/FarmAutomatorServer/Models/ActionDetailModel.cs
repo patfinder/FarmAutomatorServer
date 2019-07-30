@@ -4,7 +4,7 @@
 namespace FarmAutomatorServer.Models
 {
     /// <summary>
-    /// Lưu thông tin gắn với từng chuồng (đặc trưng bơi QR code)
+    /// Lưu thông tin gắn với từng chuồng (đặc trưng boooooi QR code)
     /// </summary>
     public class ActionDetailModel
     {
@@ -13,9 +13,9 @@ namespace FarmAutomatorServer.Models
         public string ActionId { get; set; }
 
         /// <summary>
-        /// Case Id. Mã chuồng, lấy từ QR code.
+        /// Cage Id. Mã chuồng, lấy từ QR code.
         /// </summary>
-        public string CaseId { get; set; }
+        public string CageId { get; set; }
 
         public double Quanity { get; set; }
 

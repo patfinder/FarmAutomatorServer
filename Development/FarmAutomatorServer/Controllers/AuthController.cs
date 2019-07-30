@@ -8,9 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
-using System.Web.Http;
 using System.Web.Mvc;
-using AllowAnonymousAttribute = System.Web.Http.AllowAnonymousAttribute;
 using Oracle.ManagedDataAccess.Client;
 using AttributeRouting.Web.Mvc;
 //using AttributeRouting.Web.Mvc;
@@ -20,8 +18,8 @@ using FarmAutomatorServer.Constants;
 
 namespace FarmAutomatorServer.Controllers
 {
-    [System.Web.Http.Authorize]
-    public class AuthController : Controller
+    [Authorize]
+    public class AuthController : BaseController
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(AuthController));
 
@@ -36,7 +34,7 @@ namespace FarmAutomatorServer.Controllers
             get { return HttpContext.GetOwinContext().Authentication; }
         }
 
-        //[POST("Auth")]
+        [HttpPost]
         [AllowAnonymous]
         public ActionResult Login(LoginModel model)
         {
@@ -47,11 +45,12 @@ namespace FarmAutomatorServer.Controllers
                 var params_ = new
                 {
                     userName = model.Email,
-                    Password = model.Password,
+                    model.Password,
                 };
 
-                CommandDefinition command = new CommandDefinition(
-                    "SELECT * FROM User WHERE userName = @userName AND password = @password",
+                var command = new CommandDefinition(
+                    //"SELECT * FROM USER_TABLE WHERE USER_NAME = @userName AND PASSWORD = @password",
+                    "SELECT USER_NO ID, USER_VNAME NAME FROM USER_TABLE WHERE USER_NAME = 'User 1' AND PASSWORD = 'password'",
                     params_
                 );
 
@@ -60,7 +59,7 @@ namespace FarmAutomatorServer.Controllers
 
                 if (user == null)
                 {
-                    return new HttpNotFoundResult("Invalida name or password");
+                    return new HttpNotFoundResult("Invalid name or password");
                 }
 
                 var identity = new ClaimsIdentity(new[]{
@@ -71,41 +70,53 @@ namespace FarmAutomatorServer.Controllers
 
                 Authentication.SignIn(new AuthenticationProperties
                 {
-                    IsPersistent = false, // input.RememberMe
+                    IsPersistent = true, // input.RememberMe
                 }, identity);
 
-                return Json(new { ResultCode = 0, UserName = "User1", Role = "User" });
+                return Json(new ApiResult {
+                    Data = user
+                });
             }
         }
 
-        [System.Web.Http.HttpGet]
-        [AllowAnonymous]
-        public string Test1()
+        /// <summary>
+        /// This API is for checking current user session token
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult CheckLogin()
         {
-            //return Json(new { Name = 1, Age = 100 });
-            return "Ok";
+            return new HttpStatusCodeResult(HttpStatusCode.OK, "Login Ok");
         }
 
-        //[Route("Auth/Test2")]
-        [System.Web.Http.HttpGet]
         [AllowAnonymous]
-        public ActionResult Test2()
+        public ActionResult CheckAnonymous()
+        {
+            return new HttpStatusCodeResult(HttpStatusCode.OK, "Anonymous User");
+        }
+
+        //[Route("Auth/TestDbAccess")]
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult TestDbAccess()
         {
             // Connect to Oracle
             string constr = "User Id=mbs_db;Password=123456;Data Source=OracleDataSource";
-            var conn = new OracleConnection(constr);
-            conn.Open();
+            using (var conn = new OracleConnection(constr))
+            {
+                conn.Open();
 
-            // Display Version Number
-            Console.WriteLine("Connected to Oracle " + conn.ServerVersion);
+                // Display Version Number
+                Console.WriteLine("Connected to Oracle " + conn.ServerVersion);
 
-            var users = conn.Query<UserModel>("SELECT * FROM ADMIN_WZ_USERS").Take(3);
+                var users = conn.Query<UserModel>("SELECT * FROM ADMIN_WZ_USERS").Take(3);
 
-            // Close and Dispose OracleConnection
-            conn.Close();
-            conn.Dispose();
+                // Close and Dispose OracleConnection
+                conn.Close();
+                conn.Dispose();
 
-            return Json(users);
+                return Json(users);
+            }
         }
     }
 }
