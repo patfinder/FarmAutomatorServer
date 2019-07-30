@@ -22,8 +22,11 @@ namespace FarmAutomatorServer
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-            HttpApplication context = (HttpApplication)sender;
-            context.Response.SuppressFormsAuthenticationRedirect = true;
+            //HttpApplication context = (HttpApplication)sender;
+            //context.Response.SuppressFormsAuthenticationRedirect = true;
+
+            // TODO: This seem not working
+            //HttpContext.Current.Response.SuppressFormsAuthenticationRedirect = true;
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)

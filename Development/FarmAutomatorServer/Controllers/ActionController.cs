@@ -10,17 +10,15 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Mvc;
-using AllowAnonymousAttribute = System.Web.Http.AllowAnonymousAttribute;
 using Oracle.ManagedDataAccess.Client;
 using AttributeRouting.Web.Mvc;
-//using AttributeRouting.Web.Mvc;
 using Dapper;
 using FarmAutomatorServer.Utils;
 
 namespace FarmAutomatorServer.Controllers
 {
     [System.Web.Http.Authorize]
-    public class ActionController : Controller
+    public class ActionController : BaseController
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(AuthController));
 

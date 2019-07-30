@@ -1,0 +1,8 @@
+
+http://localhost:28205/auth/Login
+POST / application/json
+{"userName": "User 1", "password": "password"}
+
+
+
+

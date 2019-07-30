@@ -172,11 +172,13 @@
   <ItemGroup>
     <Compile Include="App_Start\AttributeRouting.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="Constants\System.cs" />
+    <Compile Include="Constants\SystemConstants.cs" />
     <Compile Include="Controllers\ActionController.cs" />
+    <Compile Include="Controllers\ActionLogAttribute.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\ExceptionLogAttribute.cs" />
     <Compile Include="Controllers\JsonDotNetResult.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

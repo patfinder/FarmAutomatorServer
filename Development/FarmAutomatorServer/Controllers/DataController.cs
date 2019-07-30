@@ -8,20 +8,16 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
-using System.Web.Http;
 using System.Web.Mvc;
-using AllowAnonymousAttribute = System.Web.Http.AllowAnonymousAttribute;
 using Oracle.ManagedDataAccess.Client;
-using AttributeRouting.Web.Mvc;
-//using AttributeRouting.Web.Mvc;
 using Dapper;
-using System.Configuration;
 using FarmAutomatorServer.Utils;
+using SalesManagement.Controllers;
 
 namespace FarmAutomatorServer.Controllers
 {
-    [System.Web.Http.Authorize]
-    public class DataController : Controller
+    [Authorize, ActionLog, ExceptionLog]
+    public class DataController : BaseController
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(AuthController));
 
@@ -37,8 +33,8 @@ namespace FarmAutomatorServer.Controllers
                 conn.Open();
 
                 // Cattle cases
-                var cattles = conn.Query<CattleModel>("SELECT * FROM Task").ToList();
-                var tasks = conn.Query<TaskModel>("SELECT * FROM Task").ToList();
+                var cattles = conn.Query<CattleModel>("SELECT * FROM BIG_KIND").ToList();
+                var tasks = conn.Query<TaskModel>("SELECT * FROM BIG_KIND").ToList();
                 var feeds = conn.Query<FeedModel>("SELECT * FROM Task").ToList();
 
                 return Json(new

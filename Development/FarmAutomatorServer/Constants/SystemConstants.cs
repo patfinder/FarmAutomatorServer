@@ -10,4 +10,10 @@ namespace FarmAutomatorServer.Constants
     {
         public static string AuthenticationCookie => "auth-cookie";
     }
+
+    public enum TaskType
+    {
+        Feed,
+        Medicine
+    }
 }
