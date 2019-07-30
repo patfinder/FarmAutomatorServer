@@ -20,8 +20,6 @@ namespace FarmAutomatorServer.Controllers
     [Authorize, ActionLog, ExceptionLog]
     public class AuthController : BaseController // BaseController Controller
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof(AuthController));
-
         IAuthenticationManager Authentication
         {
             get { return HttpContext.GetOwinContext().Authentication; }
@@ -38,7 +36,6 @@ namespace FarmAutomatorServer.Controllers
                     model
                 );
 
-                // Cattle cases
                 var user = conn.Query<UserModel>(command).FirstOrDefault();
 
                 if (user == null)
@@ -57,7 +54,8 @@ namespace FarmAutomatorServer.Controllers
                     IsPersistent = true, // input.RememberMe
                 }, identity);
 
-                return Json(new ApiResult {
+                return Json(new ApiResult
+                {
                     Data = user
                 });
             }

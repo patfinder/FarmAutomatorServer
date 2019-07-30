@@ -13,6 +13,4 @@ namespace FarmAutomatorServer.Models
 
         public string Name { get; set; }
     }
-
-    
 }
