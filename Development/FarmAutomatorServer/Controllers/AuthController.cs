@@ -56,7 +56,11 @@ namespace FarmAutomatorServer.Controllers
 
                 return Json(new ApiResult
                 {
-                    Data = user
+                    Data = new {
+                        user.Id,
+                        user.Name,
+                        user.Role,
+                    }
                 });
             }
         }
