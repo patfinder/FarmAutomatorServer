@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FarmAutomatorServer.Constants;
+using System;
 //using AttributeRouting.Web.Mvc;
 
 namespace FarmAutomatorServer.Models
@@ -11,7 +12,11 @@ namespace FarmAutomatorServer.Models
     {
         public string Id { get; set; }
 
-        public string TaskDetailId { get; set; }
+        public string CattleId { get; set; }
+
+        public string FeedId { get; set; }
+
+        public FeedType FeedType { get; set; } // No-need, infer from FeedId
 
         public string UserId { get; set; }
 

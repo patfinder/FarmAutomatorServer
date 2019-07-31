@@ -5,16 +5,14 @@ using System;
 namespace FarmAutomatorServer.Models
 {
     /// <summary>
-    /// Loại Thuốc/Thức ăn
+    /// Thuốc/Thức ăn
     /// </summary>
     public class FeedModel
     {
         public string Id { get; set; }
 
-        public TaskType TaskType { get; set; }
-
-        //public string TaskId { get; set; }
-
         public string Name { get; set; }
+
+        public FeedType FeedType { get; set; }
     }
 }

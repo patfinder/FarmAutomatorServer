@@ -183,12 +183,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ActionDetailModel.cs" />
+    <Compile Include="Models\ActionCageModel.cs" />
     <Compile Include="Models\ActionUploadModel.cs" />
     <Compile Include="Models\ActionModel.cs" />
     <Compile Include="Models\ApiResult.cs" />
     <Compile Include="Models\FeedModel.cs" />
-    <Compile Include="Models\TaskModel.cs" />
     <Compile Include="Models\CattleModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -197,6 +196,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\DbUtils.cs" />
   </ItemGroup>
   <ItemGroup>

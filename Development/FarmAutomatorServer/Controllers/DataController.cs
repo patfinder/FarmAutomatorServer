@@ -31,13 +31,13 @@ namespace FarmAutomatorServer.Controllers
             {
                 var cattles = conn.Query<CattleModel>("SELECT BIG_CODE Id, BIG_NAME Name FROM BIG_KIND").ToList();
                 var feeds = conn.Query<FeedModel>("SELECT MEDIUM_CODE Id, MEDIUM_NAME Name FROM MEDIUM_KIND").ToList();
-                var taskTypes = Enum.GetValues(typeof(TaskType)).Cast<TaskType>();
+                var feedTypes = Enum.GetValues(typeof(FeedType)).Cast<FeedType>().ToArray();
 
                 var actionData = new
                 {
                     LastUpdate = DateTime.Now,
                     Cattles = cattles,
-                    Tasks = taskTypes.ToArray(),
+                    FeedTypes = feedTypes,
                     Feeds = feeds,
                 };
 

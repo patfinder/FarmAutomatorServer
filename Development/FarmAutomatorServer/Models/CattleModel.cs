@@ -4,7 +4,7 @@
 namespace FarmAutomatorServer.Models
 {
     /// <summary>
-    /// Task table. Store top level info: Loại heo
+    /// Loại heo
     /// Store stask definition. Not real task taken by workers.
     /// </summary>
     public class CattleModel

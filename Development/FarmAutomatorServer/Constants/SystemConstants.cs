@@ -8,15 +8,26 @@ namespace FarmAutomatorServer.Constants
 {
     public static class SystemConstants
     {
-        public static string AuthenticationCookie => "auth-cookie";
+        public const string AuthenticationCookie = "auth-cookie";
+
+        /// <summary>
+        /// Should not < 3
+        /// </summary>
+        public const int MaxScanPictureCount = 3;
+    }
+
+    public enum FeedType
+    {
+        Food,
+        Medicine,
     }
 
     /// <summary>
-    /// Cho ăn hoặc uống thuốc.
+    /// Cho ăn hoặc Cho uống thuốc.
     /// </summary>
     public enum TaskType
     {
         Feed,
-        Medicine
+        GiveMedicine,
     }
 }
