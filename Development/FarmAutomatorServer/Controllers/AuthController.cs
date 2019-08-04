@@ -29,10 +29,11 @@ namespace FarmAutomatorServer.Controllers
         [AllowAnonymous]
         public ActionResult Login(LoginModel model)
         {
-            using (var conn = new OracleConnection(DbUtils.ConnectionString))
+            //using (var conn = new OracleConnection(DbUtils.ConnectionString))
+            using (var conn = DbUtils.Connection)
             {
                 var command = new CommandDefinition(
-                    "SELECT USER_NO ID, USER_VNAME NAME FROM USER_TABLE WHERE USER_NAME = :userName AND PASSWORD = :Password",
+                    DbUtils._T("SELECT USER_NO ID, USER_VNAME NAME FROM USER_TABLE WHERE USER_NAME = #userName AND PASSWORD = #Password"),
                     model
                 );
 

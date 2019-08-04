@@ -11,5 +11,11 @@ Lưu thông tin loại gia súc
 ## Task
 Lưu loại công việc
 
-# Feed
+## Feed
 Lưu thông tin loại thuốc/thức ăn
+
+# API Testing
+
+curl docs: https://gist.github.com/subfuzion/08c5d85437d5d4f00e58
+curl -d "userName=User%201&password=password" -X POST http://localhost:84/auth/login
+

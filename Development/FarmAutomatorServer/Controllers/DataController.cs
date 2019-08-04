@@ -27,10 +27,10 @@ namespace FarmAutomatorServer.Controllers
             //return HttpStatusCodeResult();
 
             // Connect to Oracle
-            using (var conn = new OracleConnection(DbUtils.ConnectionString))
+            using (var conn = DbUtils.Connection)
             {
-                var cattles = conn.Query<CattleModel>("SELECT BIG_CODE Id, BIG_NAME Name FROM BIG_KIND").ToList();
-                var feeds = conn.Query<FeedModel>("SELECT MEDIUM_CODE Id, MEDIUM_NAME Name FROM MEDIUM_KIND").ToList();
+                var cattles = conn.Query<CattleModel>(DbUtils._T("SELECT BIG_CODE Id, BIG_NAME Name FROM BIG_KIND")).ToList();
+                var feeds = conn.Query<FeedModel>(DbUtils._T("SELECT MEDIUM_CODE Id, MEDIUM_NAME Name FROM MEDIUM_KIND")).ToList();
                 var feedTypes = Enum.GetValues(typeof(FeedType)).Cast<FeedType>().ToArray();
 
                 var actionData = new

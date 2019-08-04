@@ -23,9 +23,9 @@ namespace FarmAutomatorServer.Controllers
     {
         public ActionResult UploadTask(ActionModel model)
         {
-            using (var conn = new OracleConnection(DbUtils.ConnectionString))
+            using (var conn = DbUtils.Connection)
             {
-                var result = conn.Execute("INSERT INTO ACTION_TABLE(BIG_CODE, MEDIUM_CODE, USER_NO, TIME, QUANTITY) VALUES(:BIG_CODE, :MEDIUM_CODE, :USER_NO, :TIME, :QUANTITY)",
+                var result = conn.Execute(DbUtils._T("INSERT INTO ACTION_TABLE(BIG_CODE, MEDIUM_CODE, USER_NO, TIME, QUANTITY) VALUES(#BIG_CODE, #MEDIUM_CODE, #USER_NO, #TIME, #QUANTITY)"),
                     new {
                         BIG_CODE = model.CattleId,
                         MEDIUM_CODE = model.FeedId,
@@ -45,10 +45,10 @@ namespace FarmAutomatorServer.Controllers
 
         public ActionResult UploadFeed(ActionCageModel model)
         {
-            using (var conn = new OracleConnection(DbUtils.ConnectionString))
+            using (var conn = DbUtils.Connection)
             {
                 // Find action
-                var action = conn.Query<ActionModel>("SELECT * FROM ACTION_TABLE WHERE ID_ACTION = :ID_ACTION", new { ID_ACTION = model.ActionId }).SingleOrDefault();
+                var action = conn.Query<ActionModel>(DbUtils._T("SELECT * FROM ACTION_TABLE WHERE ID_ACTION = #ID_ACTION"), new { ID_ACTION = model.ActionId }).SingleOrDefault();
 
                 if(action == null)
                 {
@@ -65,7 +65,7 @@ namespace FarmAutomatorServer.Controllers
                     Request.Files[i].SaveAs(Path.Combine(FileUtils.GetPictureStorePath(action.ActionTime), pictures[i]));
                 }
 
-                var result = conn.Execute("INSERT INTO SCAN_TABLE(ID_SCAN, ID_ACTION, QUANTITY, PIC1, PIC2, PIC3) VALUES(:ID_SCAN, :ID_ACTION, :QUANTITY, :PIC1, :PIC2, :PIC3)",
+                var result = conn.Execute(DbUtils._T("INSERT INTO SCAN_TABLE(ID_SCAN, ID_ACTION, QUANTITY, PIC1, PIC2, PIC3) VALUES(#ID_SCAN, #ID_ACTION, #QUANTITY, #PIC1, #PIC2, #PIC3)"),
                     new
                     {
                         ID_SCAN = model.Id,
