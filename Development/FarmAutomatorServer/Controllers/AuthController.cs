@@ -73,14 +73,23 @@ namespace FarmAutomatorServer.Controllers
         [Authorize]
         public ActionResult CheckLogin()
         {
-            return new HttpStatusCodeResult(HttpStatusCode.OK, "Login Ok");
+            if(Authentication.User.Identity.IsAuthenticated)
+            {
+                return Json("CheckLogin: Unauthenticated user.", JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new ApiResult {
+                ResultCode = ResultCode.Unauthenticated,
+                ErrorMessages = new[] { "CheckLogin: Authenticated user." },
+            }, JsonRequestBehavior.AllowGet);
         }
 
         [AllowAnonymous]
         [HttpGet]
         public ActionResult CheckAnonymous()
         {
-            return new HttpStatusCodeResult(HttpStatusCode.OK, "Anonymous User");
+            //return new HttpStatusCodeResult(HttpStatusCode.OK, "Anonymous User");
+            return Json("CheckAnonymous successfully.", JsonRequestBehavior.AllowGet);
         }
     }
 }
