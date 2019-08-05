@@ -29,5 +29,6 @@ namespace FarmAutomatorServer.Models
         Unknown = 0,
         Success = 1,
         GenericError,
+        Unauthenticated,
     }
 }
