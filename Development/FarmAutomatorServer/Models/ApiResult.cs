@@ -11,14 +11,14 @@ namespace FarmAutomatorServer.Models
     {
         public ResultCode ResultCode { get; set; }
 
-        public string[] ErrorMessages { get; set; }
+        public string[] Messages { get; set; }
 
         public object Data { get; set; }
 
         public ApiResult()
         {
             ResultCode = ResultCode.Success;
-            ErrorMessages = new string[0];
+            Messages = new string[0];
             Data = null;
         }
     }

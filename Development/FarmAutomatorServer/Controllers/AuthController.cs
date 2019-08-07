@@ -45,7 +45,7 @@ namespace FarmAutomatorServer.Controllers
                 }
 
                 var identity = new ClaimsIdentity(new[]{
-                    new Claim(ClaimTypes.Name, user.Name),
+                    new Claim(ClaimTypes.Name, user.Id),
                     new Claim(ClaimTypes.NameIdentifier, user.Id),
                     new Claim(ClaimTypes.Role, user.Role.ToString()),
                 }, SystemConstants.AuthenticationCookie);
@@ -80,7 +80,7 @@ namespace FarmAutomatorServer.Controllers
 
             return Json(new ApiResult {
                 ResultCode = ResultCode.Unauthenticated,
-                ErrorMessages = new[] { "CheckLogin: Authenticated user." },
+                Messages = new[] { "CheckLogin: Authenticated user." },
             }, JsonRequestBehavior.AllowGet);
         }
 

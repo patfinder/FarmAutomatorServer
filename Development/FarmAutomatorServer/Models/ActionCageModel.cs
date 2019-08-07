@@ -17,6 +17,6 @@ namespace FarmAutomatorServer.Models
 
         public double Quanity { get; set; }
 
-        public string[] PictureIds { get; set; }
+        public string[] Pictures { get; set; }
     }
 }

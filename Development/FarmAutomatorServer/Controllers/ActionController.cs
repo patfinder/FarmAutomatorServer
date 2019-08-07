@@ -28,41 +28,64 @@ namespace FarmAutomatorServer.Controllers
                 var result = conn.Execute(DbUtils._T("INSERT INTO ACTION_TABLE(BIG_CODE, MEDIUM_CODE, USER_NO, TIME, QUANTITY) VALUES(#BIG_CODE, #MEDIUM_CODE, #USER_NO, #TIME, #QUANTITY)"),
                     new {
                         BIG_CODE = model.CattleId,
-                        MEDIUM_CODE = model.FeedId,
-                        USER_NO = model.UserId,
-                        TIME = DateTime.Now,
+                        MEDIUM_CODE = model.FeedId, // FeedType?
                         QUANTITY = model.Quanity,
+                        USER_NO = User.Identity.Name,
+                        TIME = DateTime.Now,
                     });
 
                 if(result > 0)
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.OK, "Upload successfully.");
+                    return Json(new ApiResult
+                    {
+                        ResultCode = ResultCode.Success,
+                        Messages = new[] { "UploadTask successfully" },
+                    }, JsonRequestBehavior.AllowGet);
                 }
 
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "Upload unsuccessfully.");
             }
         }
 
-        public ActionResult UploadFeed(ActionCageModel model)
+        public ActionResult UploadCage(ActionCageModel model)
         {
             using (var conn = DbUtils.Connection)
             {
                 // Find action
-                var action = conn.Query<ActionModel>(DbUtils._T("SELECT * FROM ACTION_TABLE WHERE ID_ACTION = #ID_ACTION"), new { ID_ACTION = model.ActionId }).SingleOrDefault();
+                //var action = conn.Query<ActionModel>(DbUtils._T("SELECT * FROM ACTION_TABLE WHERE ID_ACTION = #ID_ACTION"), new { ID_ACTION = model.ActionId }).SingleOrDefault();
+                var action = conn.Query<ActionModel>(DbUtils._T("SELECT * FROM ACTION_TABLE"), new { ID_ACTION = model.ActionId }).FirstOrDefault();
 
-                if(action == null)
+                if (action == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Action not found");
                 }
 
+                // TODO: TEST
+                model.ActionId = new Random().Next().ToString();
+
+                // nonpic fields
+                //var nonPicsFiedls = [nameof(model.ActionId)]
+
                 // Collecting pics
                 var pictures = Enumerable.Range(0, SystemConstants.MaxScanPictureCount).Select(i => (string)null).ToArray();
 
-                // Save to picture store
-                for (int i = 0; i < Math.Min(Request.Files.Count, SystemConstants.MaxScanPictureCount); i++)
+                //Request.Files[i].SaveAs(Path.Combine(FileUtils.GetPictureStorePath(action.ActionTime), pictures[i]));
+                var fileNames = Request.Form.AllKeys.Where(k => k.StartsWith("Picture-")).ToList();
+
+                var picFolder = FileUtils.GetPictureStorePath(action.ActionTime);
+                if (!Directory.Exists(picFolder)) Directory.CreateDirectory(picFolder);
+
+                for (int i = 0; i < Math.Min(fileNames.Count, SystemConstants.MaxScanPictureCount); i++)
                 {
-                    pictures[i] = $"ACT-{model.ActionId}";
-                    Request.Files[i].SaveAs(Path.Combine(FileUtils.GetPictureStorePath(action.ActionTime), pictures[i]));
+                    pictures[i] = $"APIC-{model.ActionId}-{(i+1):D02}.jpg";
+                    var path = Path.Combine(picFolder, pictures[i]);
+                    
+                    // Save to picture store
+                    using (FileStream stream = new FileStream(path, FileMode.Create))
+                    using (BinaryWriter writer = new BinaryWriter(stream))
+                    {
+                        writer.Write(Convert.FromBase64String(Request.Form[fileNames[i]]));
+                    }
                 }
 
                 var result = conn.Execute(DbUtils._T("INSERT INTO SCAN_TABLE(ID_SCAN, ID_ACTION, QUANTITY, PIC1, PIC2, PIC3) VALUES(#ID_SCAN, #ID_ACTION, #QUANTITY, #PIC1, #PIC2, #PIC3)"),
@@ -78,7 +101,11 @@ namespace FarmAutomatorServer.Controllers
 
                 if (result > 0)
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.OK, "Upload successfully.");
+                    return Json(new ApiResult
+                    {
+                        ResultCode = ResultCode.Success,
+                        Messages = new[] { "UploadCage successfully" },
+                    }, JsonRequestBehavior.AllowGet);
                 }
 
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "Upload unsuccessfully.");
