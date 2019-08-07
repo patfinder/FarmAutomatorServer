@@ -28,10 +28,10 @@ namespace FarmAutomatorServer.Controllers
                 var result = conn.Execute(DbUtils._T("INSERT INTO ACTION_TABLE(BIG_CODE, MEDIUM_CODE, USER_NO, TIME, QUANTITY) VALUES(#BIG_CODE, #MEDIUM_CODE, #USER_NO, #TIME, #QUANTITY)"),
                     new {
                         BIG_CODE = model.CattleId,
-                        MEDIUM_CODE = model.FeedId, // FeedType?
+                        MEDIUM_CODE = model.FeedId, // TODO: FeedType?
                         QUANTITY = model.Quanity,
                         USER_NO = User.Identity.Name,
-                        TIME = DateTime.Now,
+                        TIME = model.ActionTime,
                     });
 
                 if(result > 0)
