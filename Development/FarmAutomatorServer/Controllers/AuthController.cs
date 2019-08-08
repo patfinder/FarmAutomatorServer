@@ -25,8 +25,7 @@ namespace FarmAutomatorServer.Controllers
             get { return HttpContext.GetOwinContext().Authentication; }
         }
 
-        [HttpPost]
-        [AllowAnonymous]
+        [HttpPost, AllowAnonymous] // HttpGet, 
         public ActionResult Login(LoginModel model)
         {
             //using (var conn = new OracleConnection(DbUtils.ConnectionString))
